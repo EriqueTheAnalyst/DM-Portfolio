@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eric Thomas — Digital Marketer & Brand Strategist</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-dark: #0f1b2d;
+      --blue-mid: #1a3a5c;
+      --blue-accent: #378add;
+      --blue-light: #85b7eb;
+      --blue-strong: #185fa5;
+      --teal-bg: #f0faf6;
+      --teal-border: #9fe1cb;
+      --teal-dark: #085041;
+      --teal-mid: #0f6e56;
+      --teal-accent: #1d9e75;
+      --text-primary: #1a1a2e;
+      --text-secondary: #555577;
+      --text-muted: #888899;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f6f8;
+      --border: #e2e4ea;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-primary);
+      background: #f0f2f7;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .port {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--blue-dark);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -70px; right: -70px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: #1a3a5c;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -50px; left: 32%;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: #0d2540;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: #1d5fad;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; font-weight: 600;
+      color: #b5d4f4;
+      margin-bottom: 1.25rem;
+      border: 2px solid var(--blue-accent);
+    }
+    .hero h1 {
+      font-size: 38px; font-weight: 600;
+      color: #ffffff; letter-spacing: -0.5px;
+    }
+    .hero .role {
+      font-size: 16px; color: var(--blue-light);
+      margin: 6px 0 1.25rem;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .tag {
+      background: var(--blue-mid);
+      color: var(--blue-light);
+      font-size: 12px;
+      padding: 5px 13px;
+      border-radius: 20px;
+      border: 0.5px solid var(--blue-accent);
+    }
+    .hero-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .hero-link {
+      color: var(--blue-light);
+      font-size: 13px;
+      text-decoration: none;
+      padding: 7px 16px;
+      border: 0.5px solid var(--blue-accent);
+      border-radius: var(--radius-md);
+      background: transparent;
+      transition: background 0.15s;
+    }
+    .hero-link:hover { background: var(--blue-mid); }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .stat {
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .stat-num { font-size: 26px; font-weight: 600; color: var(--blue-strong); line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: 1.75rem; }
+    .section-title {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    .about-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-primary);
+    }
+
+    /* ── JOBS ── */
+    .jobs { display: flex; flex-direction: column; gap: 10px; }
+    .job {
+      background: var(--bg-primary);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .job:hover { border-color: var(--blue-accent); box-shadow: 0 2px 8px rgba(55,138,221,0.1); }
+    .job-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .job-co { font-weight: 600; font-size: 15px; color: var(--text-primary); }
+    .job-title { font-size: 13px; color: var(--blue-strong); margin-top: 3px; }
+    .job-right { display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0; }
+    .job-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; margin-top: 2px; }
+    .toggle {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.2s, background 0.15s;
+      line-height: 1;
+    }
+    .job.open .toggle { transform: rotate(45deg); background: #e8f1fb; color: var(--blue-strong); border-color: var(--blue-accent); }
+    .job-bullets {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+    .job.open .job-bullets { display: block; }
+    .job-bullets li {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-left: 18px;
+      margin-bottom: 6px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .skill-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+    }
+    .skill-cat {
+      font-size: 11px; font-weight: 600;
+      color: var(--blue-strong);
+      margin-bottom: 8px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .skill-items {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ── VOLUNTEER ── */
+    .vol {
+      background: var(--teal-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--teal-border);
+      padding: 1.25rem 1.5rem;
+    }
+    .vol-header { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
+    .vol-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--teal-accent);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .vol-icon svg { stroke: #e1f5ee; fill: none; stroke-width: 2; }
+    .vol-name { font-weight: 600; font-size: 15px; color: var(--teal-dark); }
+    .vol-role { font-size: 13px; color: var(--teal-mid); margin-top: 3px; }
+    .vol-bullets { padding-left: 18px; }
+    .vol-bullets li { font-size: 13.5px; color: var(--teal-mid); line-height: 1.65; margin-bottom: 5px; }
+
+    /* ── CERTS ── */
+    .certs-list { display: flex; flex-direction: column; gap: 8px; }
+    .cert {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+    }
+    .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue-strong); flex-shrink: 0; }
+    .cert-name { font-size: 14px; color: var(--text-primary); flex: 1; }
+    .cert-year {
+      font-size: 12px; color: var(--text-muted);
+      background: var(--bg-secondary);
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    /* ── CONTACT ── */
+    .contact-card {
+      background: var(--blue-dark);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.5rem;
+      display: flex; flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .contact-left h3 { color: #ffffff; font-size: 20px; font-weight: 600; }
+    .contact-left p { color: var(--blue-light); font-size: 14px; margin-top: 5px; }
+    .contact-items { display: flex; flex-wrap: wrap; gap: 10px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--blue-mid);
+      border-radius: var(--radius-md);
+      padding: 9px 15px;
+      color: var(--blue-light);
+      font-size: 13px;
+      border: 0.5px solid var(--blue-accent);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .contact-item:hover { background: #1e4875; }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      body { padding: 1rem 0.75rem 3rem; }
+      .hero { padding: 2rem 1.25rem; }
+      .hero h1 { font-size: 28px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-card { padding: 1.5rem 1.25rem; }
+    }
+    @media (max-width: 400px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="port">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="avatar">ET</div>
+      <h1>Eric Thomas</h1>
+      <p class="role">Digital Marketer &nbsp;·&nbsp; Social Media Manager &nbsp;·&nbsp; Brand Strategist</p>
+      <div class="hero-tags">
+        <span class="tag">Content Strategy</span>
+        <span class="tag">Audience Growth</span>
+        <span class="tag">Multi-Platform</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Account Management</span>
+        <span class="tag">Team Leadership</span>
+      </div>
+      <div class="hero-links">
+        <a class="hero-link" href="https://www.linkedin.com/in/ericthomas-88463b14a" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="hero-link" href="https://medium.com/@EriqueTom" target="_blank" rel="noopener">Medium</a>
+        <a class="hero-link" href="mailto:ethomas168@gmail.com">Email me</a>
+        <a class="hero-link" href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years experience</div></div>
+    <div class="stat"><div class="stat-num">200%</div><div class="stat-label">Twitter growth</div></div>
+    <div class="stat"><div class="stat-num">42%</div><div class="stat-label">Email open rate</div></div>
+    <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Global subscribers</div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="section-title">About me</div>
+    <div class="about-card">
+      Results-driven Digital Marketing and Social Media professional with 5+ years of experience across international brands, media organisations, and NGOs. I work at the intersection of content creation, data analytics, and brand strategy — helping brands grow audiences, tell better stories, and measure what matters. Experienced in remote and cross-functional team leadership, with a Computer Engineering background that gives me a technical edge in analytics and digital tools.
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Work experience</div>
+    <div class="jobs" id="jobs"></div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Skills & tools</div>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-cat">Strategy</div><div class="skill-items">Social media strategy<br>Brand content planning<br>Paid advertising<br>SEO &amp; analytics</div></div>
+      <div class="skill-card"><div class="skill-cat">Content</div><div class="skill-items">Video scripting &amp; editing<br>Blog &amp; newsletter writing<br>Short-form video (Reels)<br>Visual asset creation</div></div>
+      <div class="skill-card"><div class="skill-cat">Analytics</div><div class="skill-items">Google Analytics<br>Meta Insights<br>Platform dashboards<br>Performance reporting</div></div>
+      <div class="skill-card"><div class="skill-cat">Platforms</div><div class="skill-items">YouTube · Instagram · TikTok<br>LinkedIn · X (Twitter)<br>Facebook · Meta Ads</div></div>
+      <div class="skill-card"><div class="skill-cat">Tools</div><div class="skill-items">Canva · CapCut<br>Mailchimp · Substack<br>Notion · Asana<br>Google Workspace</div></div>
+      <div class="skill-card"><div class="skill-cat">Soft skills</div><div class="skill-items">Client management<br>Stakeholder comms<br>Remote team leadership<br>Cross-functional collab</div></div>
+    </div>
+  </div>
+
+  <!-- VOLUNTEER -->
+  <div class="section">
+    <div class="section-title">Volunteer work</div>
+    <div class="vol">
+      <div class="vol-header">
+        <div class="vol-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="vol-name">Ireti Foundation for the Underserved &amp; Underprivileged</div>
+          <div class="vol-role">Operations &amp; Technology Lead &nbsp;·&nbsp; 2023 – Present</div>
+        </div>
+      </div>
+      <ul class="vol-bullets">
+        <li>Leading the Digital Literacy Programme — teaching children in underprivileged communities and orphanage homes essential digital skills.</li>
+        <li>Designed and implemented operational frameworks and working processes for 3–4 annual foundation projects.</li>
+        <li>Coordinating logistics and volunteer management for the monthly Soup Kitchen and Annual Children's Party.</li>
+        <li>Directing the End-of-Year Food &amp; Clothes Distribution Drive across multiple communities.</li>
+        <li>Supporting donor communications by documenting programme outcomes and impact metrics.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="section">
+    <div class="section-title">Certifications</div>
+    <div class="certs-list">
+      <div class="cert"><div class="cert-dot"></div><div class="cert-name">McKinsey Forward Program Graduate — McKinsey &amp; Company</div><div class="cert-year">2024</div></div>
+      <div class="cert"><div class="cert-dot"></div><div class="cert-name">Data Analytics Job Simulation — Deloitte Australia</div><div class="cert-year">2025</div></div>
+      <div class="cert"><div class="cert-dot"></div><div class="cert-name">Digital Marketing for Africa — Google Digital Garage</div><div class="cert-year">2018</div></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <div class="section-title">Contact</div>
+    <div class="contact-card">
+      <div class="contact-left">
+        <h3>Let's work together</h3>
+        <p>Open to brand strategy, content, and social media roles.</p>
+      </div>
+      <div class="contact-items">
+        <a class="contact-item" href="mailto:ethomas168@gmail.com">✉ ethomas168@gmail.com</a>
+        <a class="contact-item" href="tel:+2348133013015">📞 +234 813 301 3015</a>
+        <a class="contact-item" href="https://www.linkedin.com/in/ericthomas-88463b14a" target="_blank" rel="noopener">in LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Eric Thomas &nbsp;·&nbsp; Lagos, Nigeria &nbsp;·&nbsp; Portfolio 2026</div>
+
+</div>
+
+<script>
+  const jobs = [
+    {
+      co: "JamJar Company Limited",
+      title: "Client & Account Manager",
+      date: "Sep 2024 – Dec 2025",
+      bullets: [
+        "Managed 3–4 international clients concurrently, scaling to 7 per quarter across digital and event-based projects.",
+        "Delivered 2–3 projects monthly, consistently on time and within budget.",
+        "Owned full client lifecycle from onboarding to delivery, aligned to KPIs and business objectives.",
+        "Acted as primary liaison between stakeholders and execution teams.",
+        "Produced post-project reports and documentation supporting continuous improvement and retention."
+      ]
+    },
+    {
+      co: "News Central Television",
+      title: "Team Lead, Social Media",
+      date: "Feb 2024 – Sep 2024",
+      bullets: [
+        "Led strategy across YouTube, Instagram, Facebook, X (Twitter), TikTok, and LinkedIn — 15 content pieces published daily.",
+        "Grew Twitter followers from 14K → 42K and YouTube subscribers from 100K → 150K within 7 months (200% growth).",
+        "Expanded Instagram from 49K → 59K and LinkedIn from 3K → 6.5K through platform-specific strategies.",
+        "Monetised Twitter account, generating $300–$400/month in recurring revenue.",
+        "Rebuilt and managed a 10–15 person content and social media team."
+      ]
+    },
+    {
+      co: "Opportunik Global Fund",
+      title: "Content Lead (Contract)",
+      date: "Jun 2023 – Feb 2024",
+      bullets: [
+        "4 blog articles and 2 newsletters monthly supporting brand positioning and investor education.",
+        "Authored monthly market intelligence reports for 10,000+ subscribers across the US, UK, Canada, and Nigeria.",
+        "Achieved a 42% average email open rate — more than double the industry benchmark.",
+        "Scripted and edited 4 videos per week, optimised for each social media platform.",
+        "Monitored engagement trends and refined strategy using performance insights."
+      ]
+    },
+    {
+      co: "Subomi Plumptre Inc.",
+      title: "Social Media & Content Lead (Contract)",
+      date: "May 2023 – Feb 2024",
+      bullets: [
+        "Supported the creation and launch of 5 digital courses with full content asset suites.",
+        "Produced 4 written pieces and 1 video per week across digital platforms.",
+        "Grew YouTube channel through consistent uploads and SEO-optimised content.",
+        "Created visual, video, and written assets deployed across websites, email, and social media."
+      ]
+    },
+    {
+      co: "Volition Cap",
+      title: "Sales Associate",
+      date: "Sep 2022 – Apr 2023",
+      bullets: [
+        "Managed relationships with 100+ clients across multiple investment products.",
+        "Closed an average of 3 new investment deals per month.",
+        "Generated new business through outbound prospecting, referrals, and networking.",
+        "Provided investment guidance aligned with client risk profiles and objectives."
+      ]
+    },
+    {
+      co: "Volition Cap",
+      title: "Social Media Manager",
+      date: "Aug 2021 – Aug 2022",
+      bullets: [
+        "Managed social media strategy for Volition Cap, Vizient Coop, and Volition Blue across 4 platforms.",
+        "Published 4 content pieces per platform per week, maintaining consistent brand presence.",
+        "Wrote bi-weekly blog posts and newsletters supporting brand education and engagement.",
+        "Created and edited short-form video content — 2 reels per week to drive reach.",
+        "Monitored analytics and engagement trends to refine content strategy across all accounts."
+      ]
+    }
+  ];
+
+  const container = document.getElementById('jobs');
+  jobs.forEach((j) => {
+    const div = document.createElement('div');
+    div.className = 'job';
+    div.innerHTML = `
+      <div class="job-header">
+        <div class="job-left">
+          <div class="job-co">${j.co}</div>
+          <div class="job-title">${j.title}</div>
+        </div>
+        <div class="job-right">
+          <span class="job-date">${j.date}</span>
+          <span class="toggle">+</span>
+        </div>
+      </div>
+      <ul class="job-bullets">
+        ${j.bullets.map(b => `<li>${b}</li>`).join('')}
+      </ul>`;
+    div.addEventListener('click', () => div.classList.toggle('open'));
+    container.appendChild(div);
+  });
+</script>
+</body>
+</html>
